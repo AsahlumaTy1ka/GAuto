@@ -1,22 +1,35 @@
 import os
 import json
-from mods import module
-
-blog_id = 7302333189972766248
-
+#from mods import module
 
 
 
 #htmlcont =  module.genCont()
-htmlcont = open('./file.html','r+')
+htmlcont = open('file.md','r+')
 markd = htmlcont.readlines()
 if markd[0] == '':
   post_title = markd[1]
+  htmlcont.seek(0)
+  for li in markd:
+  	if li != post_title:
+  		htmlcont.write(li)
+  htmlcont.truncate()
+  htmlcont.close()
+  		
 else:
   post_title = markd[0]
-Labls = module.genLabels(post_title=post_title)
-bannerPath = ""
+  htmlcont.seek(0)
+  for li in markd:
+  	if li != post_title:
+  		htmlcont.write(li)
+  htmlcont.truncate()
+  htmlcont.close()
+  
+#Labls = module.genLabels(post_title=post_title)
+Labls =" [test,foo,hello world,john,doe]"
+bannerPath = "/imgs/yee.png"
 #bannerPath = module.generate_image(post_title=post_title)
+
 
 def UpperFi(post_title,Labls,fname):
 
@@ -31,29 +44,22 @@ author: Asahluma Tyika
 ---
 '''
   return upstr  
-  
-# Define the SCOPES
-SCOPES = ['https://www.googleapis.com/auth/blogger']
+ 
 
-
-def postCont(blog_id, title, content, schedule_post=False, schedule_time=None):
-    """
-    Posts content to a Blogger blog and optionally schedules weekly posts.
-
-    Parameters:
-        blog_id (str): The ID of the Blogger blog.
-        title (str): The title of the blog post.
-        content (str): The content of the blog post in HTML format.
-        schedule_post (bool): Whether to schedule the post weekly. Default is False.
-        schedule_time (str): Time to post if scheduling, in HH:MM (24-hour) format. Default is None.
-    """
-
+upperText  = UpperFi(post_title,Labls,bannerPath)
+with open("file.md","r") as f:
+	lines = f.readlines()
+lines[0] = lines[0].strip()+upperText+'\n'
+with open("file.md","w") as f:
+	f.writelines(lines)
+	f.close
 
 def create_post(markdown,img_name):
    pass
+   
 
-print(f"Labels : {Labls}")
-#print(f"Banner Path : {bannerPath}")
-create_post(sevice, blog_id, post_title, post_body,Labls)
+print(f"Title : {post_title}")
+os.system("cat file.md")
+
 
 
