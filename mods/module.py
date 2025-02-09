@@ -27,7 +27,7 @@ def generate_image(post_title):
 
 def genCont():
     model = genai.GenerativeModel('gemini-1.5-flash')
-    prompt = '''Generate me a blog post about a random coding tutorial people or coders usually search about,markdown format and make it as long as possible(1000 words min) and do not take this as a chat plus dont put the markdown in a codeblock just return plain markdown and use {% highlight (language name here) linenos %} code here... {% endhighlight %} as codeblocks(this is an example) instead of code tags. Return the title of the post as just plain text at the beginning line and dont put special charecters like commas and slashes in it'''
+    prompt = '''Generate me a blog post about a random coding tutorial people or coders usually search about,markdown format and make it as long as possible(1000 words min) and do not take this as a chat plus dont put the markdown in a codeblock just return plain markdown and use {% highlight (language name here) linenos %} code here... {% endhighlight %} as codeblocks(this is an example) instead of code tags. Return the title of the post as just plain text at the beginning line and dont put special charecters like commas and slashes in it.'''
     resp = model.generate_content(prompt)
     return resp.text
 

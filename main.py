@@ -5,6 +5,7 @@ from mods import module
 from github import Github
 from dotenv import load_dotenv
 import base64
+from time import sleep
 load_dotenv()
 
 htmlcont1 =  module.genCont()
@@ -32,6 +33,7 @@ else:
   htmlcont.close()
   
 Labls = module.genLabels(post_title=post_title)
+Labls = Labls.strip("\n")
 #Labls =" [test,foo,hello world,john,doe]"
 #bannerPath = "img.jpg"
 bannerPath = module.generate_image(post_title=post_title)
@@ -51,13 +53,13 @@ author: Asahluma Tyika
   return upstr  
  
 
-upperText  = UpperFi(post_title,Labls,bannerPath)
+upperText  = UpperFi(post_title.strip("\n"),Labls,bannerPath)
 with open("content.md","r") as f:
 	lines = f.readlines()
 lines[0] = lines[0].strip()+upperText+'\n'
 with open("content.md","w") as f:
 	f.writelines(lines)
-	f.close
+	f.close()
 
 def create_post(mdfile,post_t,img_name):
    with open(mdfile,"r") as f:
@@ -79,10 +81,11 @@ def create_post(mdfile,post_t,img_name):
    print("[+] post created!")
    os.system("rm -rf content.md")
    print("[+] File deleted!")
+   sleep(120)
    with open(img_name,"rb") as img:
    	bytes = img.read()
-   	b64_data = base64.b64encode(bytes)
-   repo.create_file(f"assets/img/{img_name}","upload img",b64_data,branch="master")
+   	b64_data = bytearray(bytes)
+   repo.create_file(f"assets/img/{img_name}","upload img",bytes(b64_data),branch="master")
    print("[+] Banner image uploaded!")
    
 print(f"Banner path : {bannerPath}")   
