@@ -1,10 +1,8 @@
 import os
-import json
 from datetime import datetime
 from mods import module
 from github import Github
 from dotenv import load_dotenv
-import base64
 from time import sleep
 
 # Load environment variables
