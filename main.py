@@ -5,6 +5,16 @@ from github import Github
 from dotenv import load_dotenv
 from time import sleep
 
+'''---
+layout: post
+title: {post_title}
+thumbnail-img: /assets/img/{fname}
+share-img: /assets/img/{fname}
+tags: {Labls}
+author: Asahluma Tyika
+---
+'''
+
 # Load environment variables
 load_dotenv()
 
@@ -35,15 +45,14 @@ with open('content.md', 'r+') as htmlcont:
 
 # Generate labels and banner path
 Labls = module.genLabels(post_title=post_title).strip("\n")
-bannerPath = module.generate_image(post_title=post_title)
+#bannerPath = module.generate_image(post_title=post_title)
 
 # Function to create the upper part of the post
-def UpperFi(post_title, Labls, fname):
+def UpperFi(post_title, Labls):
     upstr = f'''---
 layout: post
 title: {post_title}
-thumbnail-img: /assets/img/{fname}
-share-img: /assets/img/{fname}
+comments: true
 tags: {Labls}
 author: Asahluma Tyika
 ---
@@ -51,7 +60,7 @@ author: Asahluma Tyika
     return upstr  
 
 # Write the upper part to the content.md file
-upperText = UpperFi(post_title.strip("\n"), Labls, bannerPath)
+upperText = UpperFi(post_title.strip("\n"), Labls)
 with open("content.md", "r") as f:
     lines = f.readlines()
 
@@ -87,16 +96,14 @@ def create_post(mdfile, post_t, img_name):
     # Remove the content.md file locally
     os.system("rm -rf content.md")
     print("[+] File deleted!")
-
-    sleep(120)
+    ''' sleep(120)
 
     # Upload the banner image to GitHub
     with open(img_name, "rb") as img:
         bytes = img.read()
 
     repo.create_file(f"assets/img/{img_name}", "upload img", bytes, branch="master")
-    print("[+] Banner image uploaded!")
+    print("[+] Banner image uploaded!")'''
 
 # Call create_post to push the content and banner image to GitHub
-print(f"Banner path: {bannerPath}")
-create_post("content.md", post_title, bannerPath)
+create_post("content.md", post_title)

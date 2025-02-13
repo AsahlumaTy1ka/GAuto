@@ -1,5 +1,17 @@
-from imagepig import ImagePig
+from google import genai
+from google.genai import types
+from PIL import Image
+from io import BytesIO
 
-imagepig = ImagePig("9d526fa6-ad4e-4aea-9b2d-759e00721b0e")
-result = imagepig.flux("Image with title 'Master recursion in python' ,blue and has coding icons")
-result.save("adorable-pig.jpeg")
+client = genai.Client(api_key='AIzaSyBst7RZW7K0OBqltjGY71V9C7mnfSiP_co')
+
+response = client.models.generate_images(
+    model='imagen-3.0-generate-002',
+    prompt='Fuzzy bunnies in my kitchen',
+    config=types.GenerateImagesConfig(
+        number_of_images= 4,
+    )
+)
+for generated_image in response.generated_images:
+  image = Image.open(BytesIO(generated_image.image.image_bytes))
+  image.show()
