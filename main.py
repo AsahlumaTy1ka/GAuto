@@ -70,7 +70,7 @@ with open("content.md", "w") as f:
     f.writelines(lines)
 
 # Function to create the post on GitHub
-def create_post(mdfile, post_t, img_name):
+def create_post(mdfile, post_t):
     with open(mdfile, "r") as f:
         data = f.read()
 
