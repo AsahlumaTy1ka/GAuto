@@ -27,6 +27,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
           API_KEY: ${{ secrets.API_KEY }}
-          AI_AKEY: ${{ secrets.AI_AKEY }}
+          gh_Key: ${{ secrets.gh_Key }}
         run: |
             python main.py
