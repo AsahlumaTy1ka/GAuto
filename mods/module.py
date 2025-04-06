@@ -27,7 +27,46 @@ def generate_image(post_title):
 
 def genCont():
     model = genai.GenerativeModel('gemini-1.5-flash')
-    prompt = '''Generate me a blog post about a random coding tutorial people or coders search about but dont always make it about tutorials make it what other tech blogs usually post about(some new trends like AI , posts about automation in python ,etc) ,markdown format and make it as long as possible(1110 words min)and stop using the "Mastering" keyword a lot switch options ,and do not take this as a chat plus dont put the markdown in a codeblock just return plain markdown and use {% highlight (language name here) linenos %} code here... {% endhighlight %} as codeblocks(this is an example) instead of code tags. Return the title of the post as just plain text at the beginning line and dont put special charecters like commas and slashes in it.DO NOT REPEAT POSTS. Structure the post to make the user stay long and you can visit gtec0.github.io to link posts incase something has a post for its self you can tell the user to visit this link to the post'''
+    prompt = ''' 
+    You are a tech blogger using Beautiful Jekyll by deanatalli. Write a single, original blog post in plain Markdown (no fenced code blocks), with the following requirements:
+
+1. **Title**  
+   - First line only: the post title, as plain text.  
+   - No punctuation like commas, slashes or colons in the title.
+
+2. **Length & Format**  
+   - Minimum 1,100 words.  
+   - Use Jekyll’s `{% highlight language linenos %}` … `{% endhighlight %}` for all code examples.  
+   - Do not wrap the entire Markdown in a code block.
+
+3. **Topic & Tone**  
+   - Pick a tech topic that people actively search for—mix it up between:  
+     - Practical coding tutorials (e.g., Python automation scripts)  
+     - Emerging trends (e.g., AI tools, DevOps best practices, serverless architectures)  
+     - Opinion pieces or deep dives (e.g., why code reviews matter, the ethics of AI)  
+   - Avoid overusing “Mastering” in the title or headings; vary your verbs (e.g., “Exploring,” “Building,” “Automating,” “Understanding”).  
+   - Write in an engaging, conversational tone that keeps readers scrolling.
+
+4. **Structure**  
+   - **Introduction**: Hook the reader with a real‑world problem or question.  
+   - **Subheadings**: Break into clear sections (use `##` and `###`).  
+   - **Code Examples**: Show copy‑and‑paste‑ready snippets using `{% highlight %}` tags.  
+   - **Links to Your Site**: Whenever you reference a topic you’ve covered before, link to the specific GTec post (e.g. “See how we built a Termux script [here](https://gtec0.github.io/your-post-slug/)”).  
+   - **Visual Aids**: Suggest where images or diagrams could go (e.g., `![diagram of workflow](path/to/image.png)`).
+
+5. **SEO & Readability**  
+   - Include 2–3 relevant keywords naturally in headings and body.  
+   - Add a brief conclusion with a call to action (e.g., “Try this script and let me know your results in the comments!”).
+
+6. **Originality**  
+   - No repetition of existing GTec posts.  
+   - Offer fresh insights or examples that differ from previous content.
+
+Produce the finished Markdown post directly.```
+
+Feel free to tweak any bullet or requirement—this should guide the AI to generate longer, more engaging, SEO‑friendly GTec articles without overusing “Mastering.”
+
+    '''
     resp = model.generate_content(prompt)
     return resp.text
 
