@@ -52,7 +52,6 @@ def genCont():
    - **Subheadings**: Break into clear sections (use `##` and `###`).  
    - **Code Examples**: Show copy‑and‑paste‑ready snippets using `{% highlight %}` tags.  
    - **Links to Your Site**: Whenever you reference a topic you’ve covered before, link to the specific GTec post (e.g. “See how we built a Termux script [here](https://gtec0.github.io/your-post-slug/)”).  
-   - **Visual Aids**: Suggest where images or diagrams could go (e.g., `![diagram of workflow](path/to/image.png)`).
 
 5. **SEO & Readability**  
    - Include 2–3 relevant keywords naturally in headings and body.  
