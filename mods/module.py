@@ -28,43 +28,43 @@ def generate_image(post_title):
 def genCont():
     model = genai.GenerativeModel('gemini-1.5-flash')
     prompt = ''' 
-    You are a tech blogger using Beautiful Jekyll by deanatalli. Write a single, original blog post in plain Markdown (no fenced code blocks), with the following requirements:
+You’re a tech blogger using Beautiful Jekyll by deanatalli. Generate one fresh, original blog post in plain Markdown (no fenced code blocks), with these rules:
 
-1. **Title**  
-   - First line only: the post title, as plain text.  
-   - No punctuation like commas, slashes or colons in the title.
+1. Title  
+   - On the very first line, output only the post title (plain text, no commas/slashes/colons).
 
-2. **Length & Format**  
-   - Minimum 1,100 words.  
-   - Use Jekyll’s `{% highlight language linenos %}` … `{% endhighlight %}` for all code examples.  
-   - Do not wrap the entire Markdown in a code block.
+2. Length & Markup  
+   - At least 1,500 words.  
+   - Use `{% highlight <language> linenos %}` … `{% endhighlight %}` for code.  
+   - Don’t wrap the whole thing in a code-block.
 
-3. **Topic & Tone**  
-   - Pick a tech topic that people actively search for—mix it up between:  
-     - Practical coding tutorials (e.g., Python automation scripts)  
-     - Emerging trends (e.g., AI tools, DevOps best practices, serverless architectures)  
-     - Opinion pieces or deep dives (e.g., why code reviews matter, the ethics of AI)  
-   - Avoid overusing “Mastering” in the title or headings; vary your verbs (e.g., “Exploring,” “Building,” “Automating,” “Understanding”).  
-   - Write in an engaging, conversational tone that keeps readers scrolling.
+3. Topic Selection (pick exactly one)  
+   - 🔲 **Emerging AI & ML** (new open-source models, fine-tuning, ethical implications)  
+   - 🔲 **JavaScript Frameworks** (React/Next.js tips, Svelte, real-world case studies)  
+   - 🔲 **Cloud & DevOps** (Kubernetes patterns, serverless best practices, CI/CD pipelines)  
+   - 🔲 **Mobile Development** (Flutter, React Native, PWA tricks)  
+   - 🔲 **Cybersecurity** (hands-on pentesting, DevSecOps, secure coding)  
+   - 🔲 **Data Science & Visualization** (Pandas alternatives, interactive dashboards)  
+   - 🔲 **IoT & Hardware Hacks** (Raspberry Pi, Arduino projects)  
 
-4. **Structure**  
-   - **Introduction**: Hook the reader with a real‑world problem or question.  
-   - **Subheadings**: Break into clear sections (use `##` and `###`).  
-   - **Code Examples**: Show copy‑and‑paste‑ready snippets using `{% highlight %}` tags.  
-   - **Links to Your Site**: Whenever you reference a topic you’ve covered before, link to the specific GTec post (e.g. “See how we built a Termux script [here](https://gtec0.github.io/your-post-slug/)”).  
+   _Only one in every three posts may be Python automation._  
 
-5. **SEO & Readability**  
-   - Include 2–3 relevant keywords naturally in headings and body.  
-   - Add a brief conclusion with a call to action (e.g., “Try this script and let me know your results in the comments!”).
+4. Structure  
+   - **Introduction**: Hook with a real problem or question.  
+   - **Sections**: Use `##`/`###` headings.  
+   - **Code Snippets**: Ready-to-copy with `{% highlight %}`.  
+   - **Internal Links**: When you refer to something you’ve covered on GTec, link to it (e.g. `[See our React hooks guide](https://gtec0.github.io/2025-04-20-hooks-react-guide/)`).  
 
-6. **Originality**  
-   - No repetition of existing GTec posts.  
-   - Offer fresh insights or examples that differ from previous content.
+5. SEO & Engagement  
+   - Sprinkle 2–3 relevant keywords in headings/body.  
+   - Vary verbs: “Exploring,” “Building,” “Automating,” “Understanding.”  
+   - End with a **Conclusion + Call to Action**.
 
-Produce the finished Markdown post directly.```
+6. Originality  
+   - Never repeat an existing GTec topic.  
+   - Bring fresh examples or data.
 
-Feel free to tweak any bullet or requirement—this should guide the AI to generate longer, more engaging, SEO‑friendly GTec articles without overusing “Mastering.”
-
+Produce the Markdown output directly. 
     '''
     resp = model.generate_content(prompt)
     return resp.text
